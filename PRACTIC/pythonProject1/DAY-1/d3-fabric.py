@@ -1,45 +1,21 @@
-# Функция как тип
+# Фабрика функций
 
-def say_hello():
-    print("Hello")
-
-
-message = say_hello
-
-
-# print(id(message))
-#
-# message()
-
-def do(a, b, op): # как параметр функции
-    return op(a, b)
+my_dict = {
+    'func1': lambda num: num + 1,
+    'func2': lambda num: num * 2,
+    "plus": lambda x, y: x + y,
+    "minus": lambda x, y: x - y,
+    "division": lambda x, y: x / y,
+    'error' : lambda *x: 'ошибка'
+}
 
 
-def sum(a, b): return a + b
+def action(match, dict_func):
+    if match in dict_func:
+        return dict_func[match]
+    return dict_func['error']
 
 
-def multiply(a, b): return a * b
+plus = action('plus1', my_dict)
 
-
-def select_op(choice): # как результат функции
-    return sum if choice == 1 else multiply
-
-op2 = select_op(1)
-op3 = select_op(2)
-
-print(op2(10,20))
-print(op3(10,20))
-
-
-# op = sum
-# op1 = multiply
-#
-# res = op(10, 20)
-# res1 = op1(10, 20)
-#
-# print(res)
-# print(res1)
-#
-# print(do(5, 5, multiply))
-# print(do(5, 5, sum))
-# print(do(50, 5, max))
+print(plus(5, 5))

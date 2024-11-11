@@ -1,18 +1,18 @@
-# Фабрика функций
-
-my_dict = {
-    'func1': lambda num: num + 1,
-    'func2': lambda num: num * 2,
-    "plus": lambda x, y: x + y,
-    "minus": lambda x, y: x - y,
-    "division": lambda x, y: x / y,
-}
-
-def action(match, dict_func):
-    return dict_func[match]
+# Карринг (частный случай замыкания или зашивания)
 
 
-plus = action('plus', my_dict)
 
-print(plus(5,5))
+def greet_curried(greeting):
+    def greet(name):
+        print(greeting + ", " + name)
+    return greet
 
+
+greet_hello = greet_curried("Hello")
+
+
+
+greet_hello("Игорь")
+greet_hello("Роман")
+
+greet_curried("Привет")("Алексей")
