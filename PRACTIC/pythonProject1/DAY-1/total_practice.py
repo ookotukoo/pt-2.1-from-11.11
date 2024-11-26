@@ -35,7 +35,7 @@ string = '1 a1 фb2  c3 abc100 10' # в строке нет знаков пре�
 
 file_names = 'main.py run.py app.py flask.py' # все файлы с расширением *.py
 
-# print(all(list(map(lambda x: x[-3:] == '.py', file_names.split(' ')))))
+# print(all(map(lambda x: x.endswith('.py'), file_names.split(' '))))
 
 special_sim = ['\n', '\\', '\'', '\"', '\a', '\b', '\f', '\r', '\t', '\v', '\0']
 
@@ -74,22 +74,15 @@ for i in list(res):
 сколько существует способов разбить их на пары. Вывести на экран все пары.
 '''
 
+from itertools import product
+
 men = ['Иван', 'Сергей']
 women = ['Мария', 'Анна', 'Зоя']
 
-def pairs(list_men: list, list_women: list) -> list:
-    output_list = []
-    for m in list_men:
-        for w in list_women:
-            output_list.append((m, w))
-    return output_list
+res = list(product(men, women))
 
-pairs = pairs(men, women)
-
-print(pairs) # ('Иван', 'Мария'), ('Иван', 'Анна'), ('Иван', 'Зоя'), ('Сергей', 'Мария'), ('Сергей', 'Анна'), ('Сергей', 'Зоя')
-print(len(pairs))
-# print(pairs.counter()) # 6
-
+# print(*res)
+# print(len(res))
 
 '''
 Задача 5 
@@ -111,3 +104,13 @@ string_var = '''зонт=1000
 палатка=10000
 спички=22
 котелок=543'''
+
+main_table = tuple(map(lambda x:tuple( x.split('=')), string_var.split('\n')))
+
+print(main_table)
+
+filter_res = filter(lambda x : int(x[1]) > 500, main_table)
+
+res = map(lambda x : x[0], filter_res)
+
+print(*res)
